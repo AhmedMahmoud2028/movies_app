@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/configuration/routes/app_routes_name.dart';
 import 'package:movies_app/core/modules/authentication/forget_password_view.dart';
 import 'package:movies_app/core/modules/authentication/login_view.dart';
 import 'package:movies_app/core/modules/authentication/register_view.dart';
+import 'package:movies_app/core/modules/layout/movie_details/movie_details_cubit.dart';
 import 'package:movies_app/core/modules/layout/movie_details/movie_details_view.dart';
 import 'package:movies_app/core/modules/layout/profile/edit_profile_view.dart';
 import 'package:movies_app/core/modules/on_boarding/fifth_screen.dart';
@@ -77,7 +79,9 @@ static Route<dynamic>? onGenerateRoute (RouteSettings settings){
 
     case AppRoutesName.movieDetails:
       return MaterialPageRoute(
-          builder: (context) => const MovieDetailsView(),
+          builder: (context) => BlocProvider(
+              create: (context) => MovieDetailsCubit(),
+            child: const MovieDetailsView() ,),
           settings: settings);
 
     case AppRoutesName.editProfile:

@@ -21,10 +21,9 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
 
   String get userName {
     final user = FirebaseAuth.instance.currentUser;
-    return user?.displayName ?? "User"; // يعرض اسم المستخدم الحقيقي
+    return user?.displayName ?? "User";
   }
 
-  // الحصول على معرف المستخدم الحالي
   String get currentUserId => FirebaseAuth.instance.currentUser?.uid ?? '';
 
   @override
@@ -35,7 +34,7 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
 
   @override
   void dispose() {
-    _tabController.dispose(); // تنظيف الـ Controller لحماية الذاكرة
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -93,7 +92,7 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
                       Column(
                         children: [
                           Text(
-                            "$wishlistCount", // يعرض العدد الحقيقي للمفضلة
+                            "$wishlistCount",
                             style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(height: 4),
@@ -116,7 +115,7 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
               },
             ),
 
-            // 2. أزرار التعديل والخروج
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -143,7 +142,6 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
             ),
             const SizedBox(height: 20),
 
-            // 3. شريط التبويب (TabBar)
             TabBar(
               dividerColor: AppColors.primary,
               indicatorAnimation: TabIndicatorAnimation.linear,
@@ -174,12 +172,10 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
               ],
             ),
 
-            // 4. محتوى التبويبات (TabBarView)
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  // Tab 1: قائمة الـ Wish List
                   StreamBuilder<List<MovieModel>>(
                     stream: getWishlistStream(),
                     builder: (context, snapshot) {
@@ -223,7 +219,6 @@ class _ProfileViewState extends State<ProfileView> with TickerProviderStateMixin
                     },
                   ),
 
-                  // Tab 2: قائمة الـ History (فارغة حالياً)
                   Center(
                     child: Assets.images.moviesEmptyImg.image(alignment: Alignment.center),
                   ),
